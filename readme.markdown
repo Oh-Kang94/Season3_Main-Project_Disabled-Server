@@ -1,1 +1,1 @@
-# local Macbook branch 확인해봐~
+# 포용누리앱을 위한 Node.js로 구현한 서버 앱

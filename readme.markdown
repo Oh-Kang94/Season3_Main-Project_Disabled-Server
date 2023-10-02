@@ -78,6 +78,21 @@ user table에 유저의 정보를 Insert한다.
 
 Req : userData(body)
 
+4-2. register / updateuser (post)
+
+user table에 유저의 정보를 Update한다.
+
+Req : userData(body)
+
+4-3.	Register / getuser (get)
+
+id를 통해 User의 정보를 가져온다.
+
+Req : id
+
+
+
+
 5-1. test / (get)
 
 6개의 렌덤포레스트로 만든 AI모델을 활용해           

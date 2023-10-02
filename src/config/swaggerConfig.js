@@ -5,7 +5,7 @@ var swaggerDefinition = {
         version: '1.0.0',
         description: '"포용누리" 앱을 위한 API 문서입니다.',
     },
-    host : "http://www.oh-kang.kro.kr:7288", // base-url
+    host : "www.oh-kang.kro.kr:7288", // base-url
     basePath : "/" // base path
 };
 

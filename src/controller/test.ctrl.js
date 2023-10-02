@@ -139,7 +139,7 @@ const phase1 = (req, res) => {
                 console.error('Error evaluating R code:', err);
                 console.log(ai_uri);
                 res.status(500).json({
-                    code: 500,
+                    code: 400,
                     message: '쿼리뜨다 오류11',
                 });
                 client.end();
@@ -157,7 +157,7 @@ const phase1 = (req, res) => {
                 if (err) {
                     console.error('Error evaluating R code:', err);
                     res.status(500).json({
-                        code: 500,
+                        code: 400,
                         message: '쿼리뜨다 오류22',
                     });
                     client.end();

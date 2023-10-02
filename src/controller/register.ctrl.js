@@ -91,7 +91,7 @@ const getUser = (req, res, next) => {
           const userData = rows[0];
           return res.status(200).json(userData); // JSON으로 묶어서 반환
         } else {
-          return res.status(404).send("사용자를 찾을 수 없음");
+          return res.status(401).send("사용자를 찾을 수 없음");
         }
       }
     }

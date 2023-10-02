@@ -4,6 +4,32 @@ const db = require("../config/db.js");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+/**
+ * @api {get} /login/:id/:password Request User information
+ * @apiName GetUser
+ * @apiGroup Login
+ *
+ * @apiParam {String} id Users unique ID.
+ * @apiParam {String} password Users password.
+ *
+ * @apiSuccess {String} token ACCESS TOKEN for the User.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "code": 200,
+ *       "message": "로그인 토큰",
+ *       "token": "token example"
+ *     }
+ *
+ * @apiError error 401 : 에러내용 확인
+ * 
+ * @apiErrorExample {json} Error (example):
+ * {
+ *   "error": "아이디 비번 틀림"
+ * }
+ */
+
 // login
 const login = (req, res, next) => {
   const key = process.env.SECRET_KEY;
@@ -30,7 +56,7 @@ const login = (req, res, next) => {
 
       if (deletedate !== null) {
         console.log(`${id}는 삭제된 사용자입니다.`);
-        return res.status(403).json({ error: "삭제된 사용자입니다." });
+        return res.status(401).json({ error: "삭제된 사용자입니다." });
       }
 
       // Generate JWT token
@@ -50,7 +76,7 @@ const login = (req, res, next) => {
       console.log(`${id}로 로그인 성공`)
       return res.status(200).json({
         code: 200,
-        message: "로그인 토큰\n",
+        message: "로그인 토큰",
         token: token,
       });
     }
@@ -75,7 +101,7 @@ const getpic = (req, res, next) => {
           console.log(avatarPath);
           return res.status(200).send(avatarPath); // JSON으로 묶지 않고 값만 반환
         } else {
-          return res.status(404).json({ error: "사용자를 찾을 수 없음" });
+          return res.status(40).json({ error: "사용자를 찾을 수 없음" });
         }
       }
     }
@@ -89,7 +115,7 @@ const getKakaoid = (req, res, next) => {
 
   // kakaologin 불러오기
   db.query(
-    "SELECT id,name,avatar FROM user WHERE kakaoid = ? AND deletedate IS NULL",
+    "SELECT id,name,avatar FROM user WHERE kakaoid = ?",
     [id],
     (error, results, fields) => {
       if (error) {
@@ -98,9 +124,14 @@ const getKakaoid = (req, res, next) => {
       } else {
         if (results.length > 0) {
           const userData = results[0]; // id, name, avatar 정보를 객체로 저장
-          return res.status(200).json(userData); // JSON으로 묶어서 반환
+          if (deletedate !== null) {
+            console.log(`${id}는 삭제된 사용자입니다.`);
+            return res.status(401).json({ error: "삭제된 사용자입니다." });
+          } else {
+            return res.status(200).json(userData); // JSON으로 묶어서 반환
+          }
         } else {
-          return res.status(404).send("사용자를 찾을 수 없음");
+          return res.status(401).send("사용자를 찾을 수 없음");
         }
       }
     }
@@ -122,8 +153,14 @@ const getGoogleid = (req, res, next) => {
         return res.status(500).send("서버 망가짐");
       } else {
         if (results.length > 0) {
-          const userData = results[0]; // id, name, avatar 정보를 객체로 저장
-          return res.status(200).json(userData); // JSON으로 묶어서 반환
+          const userData = results[0];
+          // id, name, avatar 정보를 객체로 저장
+          if (deletedate !== null) {
+            console.log(`${id}는 삭제된 사용자입니다.`);
+            return res.status(401).json({ error: "삭제된 사용자입니다." });
+          } else {
+            return res.status(200).json(userData); // JSON으로 묶어서 반환
+          }
         } else {
           return res.status(404).send("사용자를 찾을 수 없음");
         }

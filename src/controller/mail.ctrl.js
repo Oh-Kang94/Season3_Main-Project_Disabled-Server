@@ -60,7 +60,7 @@ const sendEmail = (req, res) => {
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log(error);
-                    res.send(error);
+                    res.status(402).send(error);
                 } else {
                     console.log('Email sent: ' + info.response);
                     console.log(`코드는 이걸로 잘 보냄.${randomCode}`);
@@ -77,7 +77,7 @@ const sendEmail = (req, res) => {
             }, 5 * 60 * 1000); // 5분
         } else {
             console.log("사용자를 찾을 수 없음");
-            res.status(404).json({ error: "사용자를 찾을 수 없음" });
+            res.status(401).json({ error: "사용자를 찾을 수 없음" });
         }
     });
 }
@@ -125,7 +125,7 @@ const findId = (req, res) => {
                     console.log(userData); // JSON으로 묶어서 반환
                     return res.status(200).json(userData); // JSON으로 묶어서 반환
                 } else {
-                    return res.status(404).send("사용자를 찾을 수 없음");
+                    return res.status(401).send("사용자를 찾을 수 없음");
                 }
             }
         }

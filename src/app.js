@@ -19,7 +19,7 @@ figlet("MainProject\nDisabled Server!!", function (err, data) {
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const PORT = 3000;
+const PORT = 7288;
 
 var cors = require("cors");
 app.use(cors());

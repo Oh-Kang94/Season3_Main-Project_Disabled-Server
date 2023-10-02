@@ -101,6 +101,14 @@ Req : id
 
 Req : ai, age, id, disabled, address, date
 로 이루어진 46개의 req
+### 설치방법
+    npm install
+    ** 일반 실행
+    nodemon ./src/bin/www.js
+    ** 백그라운드에서 실행
+    pm2 start ./src/bin/www.js
+
+
 
 
 ## 기술 스택

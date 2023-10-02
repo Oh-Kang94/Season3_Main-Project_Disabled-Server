@@ -1,0 +1,9 @@
+{
+    "name": "season3_team1_mainproject_server",
+    "version": "1.0.0",
+    "description": "Documentation for the REST api access provided at season3_team1",
+    "title": "How to this api use",
+    "url" : "http://www.oh-kang.kro.kr:7288",
+    "sampleUrl": "http://www.oh-kang.kro.kr:7288"
+}
+

@@ -4,32 +4,6 @@ const db = require("../config/db.js");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-/**
- * @api {get} /login/:id/:password Request User information
- * @apiName GetUser
- * @apiGroup Login
- *
- * @apiParam {String} id Users unique ID.
- * @apiParam {String} password Users password.
- *
- * @apiSuccess {String} token ACCESS TOKEN for the User.
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *       "code": 200,
- *       "message": "로그인 토큰",
- *       "token": "token example"
- *     }
- *
- * @apiError error 401 : 에러내용 확인
- * 
- * @apiErrorExample {json} Error (example):
- * {
- *   "error": "아이디 비번 틀림"
- * }
- */
-
 // login
 const login = (req, res, next) => {
   const key = process.env.SECRET_KEY;

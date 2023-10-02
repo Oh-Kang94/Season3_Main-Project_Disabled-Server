@@ -25,6 +25,11 @@ var cors = require("cors");
 app.use(cors());
 // 미들웨어를 이용하는 방법
 
+// Swagger UI 작성
+const swaggerUi = require('swagger-ui-express');
+app.use('/', swaggerUi.serve, swaggerUi.setup(require('./config/swaggerConfig')));
+
+
 const login = require("./routes/login.js");
 const maps = require("./routes/maps.js");
 const register = require("./routes/register.js");

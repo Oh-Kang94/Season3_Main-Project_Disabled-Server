@@ -174,64 +174,6 @@ const phase1 = (req, res) => {
     });
 };
 
-/// /test/iris?
-const iris = (req, res) => {
-
-    const sepalLength = req.query.sepalLength;
-    const sepalWidth = req.query.sepalWidth;
-    const petalLength = req.query.petalLength;
-    const petalWidth = req.query.petalWidth;
-
-    r.connect('localhost', 6311, function (err, client) {
-        if (err) {
-            console.error('Error connecting to Rserve:', err);
-            res.status(500).json({
-                code: 500,
-                message: '내부 서버 오류',
-            });
-            return;
-        }
-
-        var ai_uri = "/home/ubuntu/apps/src/rds/randomForest_Iris.rds";
-
-        const script = `
-        library(randomForest)
-        rf <- readRDS('${ai_uri}','rb')
-        result <- as.character(predict(rf, (list(Sepal.Length=${sepalLength}, Sepal.Width=${sepalWidth},Petal.Length=${petalLength}, Petal.Width=${petalWidth})),type='prob'))
-        result
-        `;
-
-        client.evaluate(script, function (err, ans) {
-            if (err) {
-                console.error('Error evaluating R code:', err);
-                res.status(500).json({
-                    code: 500,
-                    message: '쿼리뜨다 오류3333',
-                });
-                client.end();
-                return;
-            }
-
-            console.log(ans);
-            // res.status(200).json({
-            //     code: 200,
-            //     message: ans,
-            // });
-
-            // result 값을 퍼센트로 변환하여 JSON 응답으로 보내기
-            const resultInPercent = ans.map(value => value * 100);
-            res.json({
-                code: 200,
-                message: '성공',
-                result: resultInPercent,
-            });
-
-            client.end();
-        });
-    });
-};
-
 module.exports = {
     phase1: phase1,
-    iris: iris
 };

@@ -9,7 +9,7 @@ Flutter App을 위한 Express 기반의 서버입니다.
 ## API 문서
 
 이 프로젝트의 API 문서는 Swagger UI를 통해 확인할 수 있습니다.
-<a href="http://www.oh-kang.kro.kr:18712">
+<a href="http://www.oh-kang.kro.kr:7288">
     <img src = https://github.com/Oh-Kang94/season3_team1_disabled_app/blob/main/Swagger-UI.png>
     <br/>             
   Swagger UI보러 가기!!

@@ -27,7 +27,7 @@ app.use(cors());
 
 // Swagger UI 작성
 const swaggerUi = require('swagger-ui-express');
-app.use('/', swaggerUi.serve, swaggerUi.setup(require('./config/swaggerConfig')));
+app.use('/api', swaggerUi.serve, swaggerUi.setup(require('./config/swaggerConfig')));
 
 
 const login = require("./routes/login.js");

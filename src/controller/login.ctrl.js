@@ -98,11 +98,11 @@ const getKakaoid = (req, res, next) => {
       } else {
         if (results.length > 0) {
           const userData = results[0]; // id, name, avatar 정보를 객체로 저장
-          if (deletedate !== null) {
+          if (results[0].deletedate !== null) {
             console.log(`${id}는 삭제된 사용자입니다.`);
-            return res.status(401).json({ error: "삭제된 사용자입니다." });
-          } else {
             return res.status(200).json(userData); // JSON으로 묶어서 반환
+          } else {
+            return res.status(401).json({ error: "삭제된 사용자입니다." });
           }
         } else {
           return res.status(401).send("사용자를 찾을 수 없음");
@@ -129,11 +129,11 @@ const getGoogleid = (req, res, next) => {
         if (results.length > 0) {
           const userData = results[0];
           // id, name, avatar 정보를 객체로 저장
-          if (deletedate !== null) {
+          if (results[0].deletedate !== null) {
             console.log(`${id}는 삭제된 사용자입니다.`);
-            return res.status(401).json({ error: "삭제된 사용자입니다." });
-          } else {
             return res.status(200).json(userData); // JSON으로 묶어서 반환
+          } else {
+            return res.status(401).json({ error: "삭제된 사용자입니다." });
           }
         } else {
           return res.status(404).send("사용자를 찾을 수 없음");
